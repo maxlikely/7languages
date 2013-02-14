@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Implementations of Seven Languages in Seven Weeks
 =
 
@@ -17,9 +16,4 @@ You can read more about association rule mining from:
 
 * [Artificial Intelligence in Motion](http://aimotion.blogspot.co.uk/2013/01/machine-learning-and-data-mining.html)
 * [Association Rule Learning from Wikipedia](http://en.wikipedia.org/wiki/Association_rule_learning)
-=======
-7languages
-==========
 
-Excerpts from Seven Languages in Seven Weeks
->>>>>>> aa7fab3982cecae7f92944df7cb56e8acd3c692a
