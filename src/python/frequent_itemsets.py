@@ -8,19 +8,18 @@ http://aimotion.blogspot.co.uk/2013/01/machine-learning-and-data-mining.html
 
 '''
 
-# coding: utf-8
-
 from collections import Counter
 
 def union(s):
     '''
     Returns the union of itemsets in s.
-    '''
-    united = set()
-    for subset in s:
-        united |= subset
 
-    return united
+    >>> T = frozenset([frozenset([1,2,3]), frozenset([1,2,4])])
+    >>> union(T)
+    frozenset([1, 2, 3, 4])
+    '''
+
+    return reduce(frozenset.union, s)
 
 def apriori(T, epsilon=3):
     '''
@@ -29,16 +28,16 @@ def apriori(T, epsilon=3):
 
     >>> T = [{1,2,5}, {2,4}, {2,3}, {1,2,4}, {1,3}, {2,3}, {1,3}, {1,2,3,5}, {1,2,3}]
     >>> apriori(T, epsilon=2)
-    set([frozenset([2, 4]), frozenset([5]), frozenset([3]), frozenset([1, 2]), frozenset([1, 5]), frozenset([1, 2, 5]), frozenset([4]), frozenset([2, 3]), frozenset([2, 5]), frozenset([1]), frozenset([1, 3]), frozenset([1, 2, 3]), frozenset([2])])
+    frozenset([frozenset([2, 4]), frozenset([5]), frozenset([3]), frozenset([1, 2]), frozenset([1, 5]), frozenset([1, 2, 5]), frozenset([4]), frozenset([2, 3]), frozenset([2, 5]), frozenset([1]), frozenset([1, 3]), frozenset([1, 2, 3]), frozenset([2])])
 
     >>> T = [{1,2,3,4}, {1,2}, {2,3,4}, {2,3}, {1,2,4}, {3,4}, {2,4}]
     >>> apriori(T, epsilon=3)
-    set([frozenset([2, 4]), frozenset([3]), frozenset([1, 2]), frozenset([3, 4]), frozenset([4]), frozenset([2, 3]), frozenset([1]), frozenset([2])])
+    frozenset([frozenset([2, 4]), frozenset([3]), frozenset([1, 2]), frozenset([3, 4]), frozenset([4]), frozenset([2, 3]), frozenset([1]), frozenset([2])])
     '''
 
     # generate frequent itemsets of size-1 (1-itemsets)
     counts = Counter(item for trans in T for item in trans)
-    L = [{frozenset([cand]) for cand,count in counts.iteritems() if count >= epsilon}]
+    L = [frozenset(frozenset([cand]) for cand,count in counts.iteritems() if count >= epsilon)]
 
     # generate frequent (k+1)-itemsets
     k = 1
